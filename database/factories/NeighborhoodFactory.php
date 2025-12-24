@@ -30,7 +30,7 @@ final class NeighborhoodFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => array_rand(self::FAKES),
+            'name' => self::FAKES[array_rand(self::FAKES)],
         ];
     }
 }

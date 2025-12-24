@@ -20,7 +20,7 @@ final class OfficeFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => "{$this->faker->city()} {$this->faker->streetName()}",
+            'name' => "{$this->faker->city()} {$this->faker->streetName}",
         ];
     }
 }

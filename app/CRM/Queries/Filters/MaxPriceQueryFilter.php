@@ -36,7 +36,7 @@ final readonly class MaxPriceQueryFilter implements QueryFilter
     {
         return match (true) {
             $this->operation === OperationType::SALE => ['sell_price'],
-            $this->operation === OperationType::RENT => ['rent_price'],
+            $this->operation === OperationType::RENT => ['rental_price'],
             default => ['sell_price', 'rental_price']
         };
     }

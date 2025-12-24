@@ -4,7 +4,9 @@ namespace App\CRM\Mappers;
 
 use App\Contracts\QueryFilter;
 use App\CRM\Queries\Filters\MaxPriceQueryFilter;
+use App\CRM\Queries\Filters\MaxSurfaceQueryFilter;
 use App\CRM\Queries\Filters\MinPriceQueryFilter;
+use App\CRM\Queries\Filters\MinSurfaceQueryFilter;
 use App\CRM\Queries\Filters\OfficeQueryFilter;
 use App\CRM\Queries\Filters\PropertyTypeQueryFilter;
 use App\CRM\Queries\Filters\ZoneQueryFilter;
@@ -24,7 +26,7 @@ final readonly class AvailableForOperationsRequestToFiltersMapper
         $attributes = $request->validated();
 
         /** @var User $user */
-        $user = User::find(1);
+        $user = $request->user();
 
         $this->parseOfficeFilterForCurrentUser($filters, $attributes, $user);
         $this->parseOfficeFilter($filters, $attributes);
@@ -58,7 +60,7 @@ final readonly class AvailableForOperationsRequestToFiltersMapper
     private function parsePropertyTypeFilter(array &$filters, array $attributes): void
     {
         if (! empty($attributes['property_type_id'])) {
-            $filters[] = new PropertyTypeQueryFilter($attributes['office_id']);
+            $filters[] = new PropertyTypeQueryFilter($attributes['property_type_id']);
         }
     }
 
@@ -82,11 +84,11 @@ final readonly class AvailableForOperationsRequestToFiltersMapper
     private function parseSurfaceFilters(array &$filters, array $attributes): void
     {
         if (! empty($attributes['min_surface_m2'])) {
-            $filters[] = new MinPriceQueryFilter($attributes['min_price']);
+            $filters[] = new MinSurfaceQueryFilter($attributes['min_surface_m2']);
         }
 
         if (! empty($attributes['max_surface_m2'])) {
-            $filters[] = new MaxPriceQueryFilter($attributes['max_price']);
+            $filters[] = new MaxSurfaceQueryFilter($attributes['max_surface_m2']);
         }
     }
 
